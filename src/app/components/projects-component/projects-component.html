@@ -1,13 +1,22 @@
-<!-- Sección de proyectos -->
-<section class="max-w-6xl mx-auto py-8">
-    <h2 class="text-3xl md:text-4xl font-bold text-blue-500 mb-8 text-center">My Projects</h2>
+<section class="mx-auto py-8">
+    <h2 class="text-3xl md:text-4xl font-bold text-blue-500 mb-8 text-center">My Public Projects</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         @for (project of projects; track project.id; let i = $index) {
             <div class="card bg-slate-900 rounded-lg shadow-xl overflow-hidden" (click)="openCarousel(i)">
-                <div class="h-48 bg-gradient-to-r" [class]="getGradientClass(i)">
-                    <span class="text-white text-xl font-bold">Project Image {{ i + 1 }}</span>
+
+                <div class="h-48 overflow-hidden">
+                    @if (project.slides && project.slides.length > 0) {
+                        <img [src]="project.slides[0].image"
+                             [alt]="project.slides[0].alt"
+                             class="w-full h-full object-cover">
+                    } @else {
+                        <div class="w-full h-full bg-gradient-to-r flex items-center justify-center" [class]="getGradientClass(i)">
+                            <span class="text-white text-xl font-bold">No Image Available</span>
+                        </div>
+                    }
                 </div>
+
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-blue-400 mb-2">{{ project.title }}</h3>
                     <p class="text-gray-300">{{ project.description }}</p>
@@ -22,7 +31,6 @@
     </div>
 </section>
 
-<!-- Modal del carrusel -->
 @if (isModalOpen) {
     <div class="modal fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50" (click)="onModalClick($event)">
         <span class="close-btn absolute top-5 right-8 text-white text-4xl font-bold cursor-pointer z-10" (click)="closeCarousel()">&times;</span>
@@ -37,15 +45,17 @@
             &#10095;
         </button>
 
-        <div class="modal-content max-w-90vw max-h-90vh relative">
-            <img [src]="getCurrentSlide().image" [alt]="getCurrentSlide().alt" class="rounded-lg w-full h-auto max-h-90vh object-contain">
+        <div class="modal-content relative max-w-[70vw] max-h-[90vh] flex flex-col items-center">
 
-            <!-- Botón de enlace al proyecto -->
+            <div class="flex-shrink-0 w-full max-h-[90vh]">
+                <img [src]="getCurrentSlide().image" [alt]="getCurrentSlide().alt" class="rounded-t-lg w-full h-auto object-contain">
+            </div>
+
             @if (currentProject?.hasLink) {
-                <a [href]="projectLink"
-                   target="_blank"
-                   class="project-link absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
-                   (click)="$event.stopPropagation()">
+                <a [href]="currentProject?.link"
+                    target="_blank"
+                    class="project-link w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-b-lg cursor-pointer flex-shrink-0"
+                    (click)="$event.stopPropagation()">
                     View Project
                 </a>
             }

@@ -13,6 +13,8 @@ interface Project {
   slides: ProjectSlide[];
   hasLink: boolean;
   gradient: string;
+  // NUEVO: Propiedad para el link específico del proyecto
+  link: string;
 }
 
 @Component({
@@ -24,44 +26,84 @@ export class ProjectsComponent {
   isModalOpen = false;
   currentProjectIndex = 0;
   currentSlideIndex = 0;
-  projectLink = 'https://github.com/ricardoaraujo/task-app';
 
   projects: Project[] = [
+    // Hogwarts API
     {
       id: 0,
-      title: 'E-commerce Platform',
-      description: 'A full-stack e-commerce solution with payment integration and admin dashboard.',
-      technologies: ['Python', 'Django', 'PostgreSQL'],
+      title: 'hogwartsAPI Django-Angular',
+      description: 'Simple Hogwarts RestAPI. You can insert, update, and delete the houses with their students. POSTGRES SQL.',
+      technologies: ['Python', 'Django', 'PostgreSQL', 'Angular', 'TypeScript', 'HTML', 'CSS', 'Bootstrap', 'REST API', 'Git'],
       slides: [
-        { image: 'profile.jpg', alt: 'Project 1 Image 1' },
-        { image: 'https://via.placeholder.com/800x500/1e40af/ffffff?text=Project+1+Image+2', alt: 'Project 1 Image 2' },
-        { image: 'https://via.placeholder.com/800x500/1d4ed8/ffffff?text=Project+1+Image+3', alt: 'Project 1 Image 3' }
-      ],
-      hasLink: false,
-      gradient: 'from-blue-600 to-purple-700'
-    },
-    {
-      id: 1,
-      title: 'Energy Monitoring System',
-      description: 'Real-time energy consumption tracking with predictive analytics.',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      slides: [
-        { image: 'https://via.placeholder.com/800x500/047857/ffffff?text=Project+2+Image+1', alt: 'Project 2 Image 1' },
-        { image: 'https://via.placeholder.com/800x500/059669/ffffff?text=Project+2+Image+2', alt: 'Project 2 Image 2' }
-      ],
-      hasLink: false,
-      gradient: 'from-green-600 to-teal-700'
-    },
-    {
-      id: 2,
-      title: 'Task Management App',
-      description: 'Collaborative task management with real-time updates and team features.',
-      technologies: ['Vue.js', 'Express', 'MySQL'],
-      slides: [
-        { image: 'https://via.placeholder.com/800x500/7c3aed/ffffff?text=Project+3+Image+1', alt: 'Project 3 Image 1' },
-        { image: 'https://via.placeholder.com/800x500/8b5cf6/ffffff?text=Project+3+Image+2', alt: 'Project 3 Image 2' }
+        { image: 'assets/0/1.png', alt: 'Project 0 Image 1' },
+        { image: 'assets/0/2.png', alt: 'Project 0 Image 2' },
+        { image: 'assets/0/3.png', alt: 'Project 0 Image 3' }
       ],
       hasLink: true,
+      // LINK ESPECÍFICO
+      link: 'https://github.com/Richardustev/hogwartsAPI_django_angular',
+      gradient: 'from-blue-600 to-purple-700'
+    },
+    // ANGULAR & DJANGO pokeApi
+    {
+      id: 1,
+      title: 'Angular & Django pokeApi',
+      description: 'Pokedex powered by PokeApi and Angular. Backend to register and Login with Django. Also added some security with authGuard.',
+      technologies: ['Python', 'Django', 'PostgreSQL', 'Angular', 'TypeScript', 'HTML', 'CSS', 'Bootstrap', 'REST API', 'Git'],
+      slides: [
+        { image: 'assets/3/1.png', alt: 'Project 1 Image 1' },
+        { image: 'assets/3/2.png', alt: 'Project 1 Image 2' },
+        { image: 'assets/3/3.png', alt: 'Project 1 Image 3' },
+        { image: 'assets/3/4.png', alt: 'Project 1 Image 3' },
+      ],
+      hasLink: true,
+      // LINK ESPECÍFICO
+      link: 'https://github.com/Richardustev/Angular_Django_PokeApi_Pokedex',
+      gradient: 'from-purple-600 to-pink-700'
+    },
+    // DJANGO & POSTGRES LOGIN
+    {
+      id: 2,
+      title: 'Django & Postgres simple login',
+      description: 'Simple login base to recycle in future projects.',
+      technologies: ['Python', 'Django', 'PostgreSQL', 'Angular',  'REST API', 'Git', 'TypeScript', 'HTML', 'CSS', 'Materialize'],
+      slides: [
+        { image: 'assets/1/1.png', alt: 'Project 1 Image 1' },
+        { image: 'assets/1/2.png', alt: 'Project 1 Image 2' },
+        { image: 'assets/1/3.png', alt: 'Project 1 Image 3' },
+        { image: 'assets/1/4.png', alt: 'Project 1 Image 4' },
+      ],
+      hasLink: true,
+      // LINK ESPECÍFICO
+      link: 'https://github.com/Richardustev/DJANGO_POSTGRESQL_SIMPLE_LOGIN',
+      gradient: 'from-green-600 to-teal-700'
+    },
+    // DJANGO & MYSQL API
+    {
+      id: 3,
+      title: 'Django & MySQL API',
+      description: 'Learning to make REST APIs with Django and MySQL.',
+      technologies: ['Python', 'Django', 'MySQL', 'REST API', 'Git'],
+      slides: [
+        { image: 'assets/2/1.png', alt: 'Project 2 Image 1' },
+      ],
+      hasLink: true,
+      // LINK ESPECÍFICO
+      link: 'https://github.com/Richardustev/DJANGO_MySQL_API',
+      gradient: 'from-purple-600 to-pink-700'
+    },
+    // DJANGO & MYSQL LOGIN API
+    {
+      id: 4,
+      title: 'Django & MySQL login API',
+      description: 'Register, Login and update you user!.',
+      technologies: ['Python', 'Django', 'MySQL', 'REST API', 'Git'],
+      slides: [
+        { image: 'assets/4/1.png', alt: 'Project 4 Image 1' },
+      ],
+      hasLink: true,
+      // LINK ESPECÍFICO
+      link: 'https://github.com/Richardustev/DJANGO_MySQL_LOGIN',
       gradient: 'from-purple-600 to-pink-700'
     }
   ];
@@ -98,7 +140,7 @@ export class ProjectsComponent {
 
   getCurrentSlide(): ProjectSlide {
     return this.currentProject?.slides[this.currentSlideIndex] ||
-           { image: '', alt: 'Image not available' };
+              { image: '', alt: 'Image not available' };
   }
 
   onModalClick(event: Event): void {
