@@ -1,1 +1,60 @@
 @import "tailwindcss";
+
+/* 1. Estilos para el cuerpo (Cubre toda la vista) */
+body {
+    /* Define la altura completa de la ventana (Viewport Height) */
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    /* Color base azul oscuro (similar a bg-blue-950) */
+    background-color: #070b13;
+    color: #ffffff; /* Texto claro para contraste */
+    position: relative;
+}
+
+/* 2. El elemento de la animación de la ola (Cubre toda la página) */
+#ps3-wave-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Lo envía al fondo, detrás de <app-root> */
+
+    /* Múltiples gradientes radiales en tonos azules */
+    background:
+        /* Onda Azul Suave */
+        radial-gradient(circle at 10% 20%, rgba(50, 80, 150, 0.6) 0%, rgba(7, 11, 19, 0) 40%),
+        /* Onda Cian/Luminosa */
+        radial-gradient(circle at 70% 80%, rgba(80, 150, 200, 0.4) 0%, rgba(7, 11, 19, 0) 40%),
+        /* Onda Índigo Profundo */
+        radial-gradient(circle at 40% 50%, rgba(30, 60, 120, 0.7) 0%, rgba(7, 11, 19, 0) 40%),
+        /* Onda Azul Eléctrico */
+        radial-gradient(circle at 90% 10%, rgba(150, 200, 255, 0.3) 0%, rgba(7, 11, 19, 0) 40%);
+
+    /* Tamaño grande para el patrón de fondo */
+    background-size: 300% 300%;
+
+    /* Aplica la animación */
+    animation: ps3-wave-movement 35s linear infinite; /* Aumenté el tiempo a 35s para un movimiento más lento */
+}
+
+/* 3. Definición de la animación (movimiento lento del fondo) */
+@keyframes ps3-wave-movement {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* 4. Estilo para el contenido principal */
+app-root {
+    position: relative;
+    z-index: 1; /* Asegura que tu aplicación esté por encima de la ola */
+    /* Aquí podrías añadir un min-height: 100vh; si tu app-root debe ocupar toda la pantalla */
+}
